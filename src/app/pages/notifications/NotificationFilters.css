@@ -1,0 +1,13 @@
+.notification-filters-accordion {
+}
+
+.notification-filters-accordion .filter-checkbox {
+    margin-top: 3px;
+}
+
+.notification-filters-accordion .typeLabel {
+}
+
+.notification-filters-accordion .typeLabel .typeIcon {
+    color: #666;
+}

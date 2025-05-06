@@ -1,0 +1,75 @@
+.notification-list-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: 14px;
+    display: flex;
+}
+.notification-list-item:hover {
+    background-color: #ddf4ff;
+}
+
+.notification-list-item.read {
+    background-color: #f6f8fa;
+}
+
+.notification-list-item .nli-icon {
+    padding-right: 5px;
+    color: #1a7f37;
+}
+
+.notification-list-item .nli-summary {
+    flex: 1;
+    padding-right: 15px;
+}
+
+.notification-list-item .nli-summary .nli-repo {
+    font-size: 12px;
+}
+
+.notification-list-item .nli-summary .nli-repo .nli-repo-url {
+    color: #444;
+}
+.notification-list-item.read .nli-summary .nli-repo .nli-repo-url {
+    color: #567;
+}
+
+.notification-list-item .nli-summary .nli-repo .nli-item-url {
+    color: #666;
+    margin-left: 5px;
+}
+.notification-list-item.read .nli-summary .nli-repo .nli-item-url {
+    color: #89A;
+}
+
+.notification-list-item .nli-summary .nli-title {
+    color: #454545;
+    font-weight: bold;
+}
+.notification-list-item.read .nli-summary .nli-title {
+    color: #456;
+    font-weight: lighter;
+}
+
+.notification-list-item .nli-reason {
+    font-size: 12px;
+}
+.notification-list-item.unread:hover .nli-reason {
+    display: none;
+}
+
+.notification-list-item .nli-updated {
+    width: 150px;
+    text-align: right;
+    color: #666;
+}
+.notification-list-item.unread:hover .nli-updated {
+    display: none;
+}
+
+.notification-list-item .nli-actions {
+    display: none;
+}
+.notification-list-item:hover .nli-actions {
+    display: inherit;
+}

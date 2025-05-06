@@ -1,0 +1,14 @@
+.ps_settings-header {
+}
+
+.notification-container {
+    display: flex;
+}
+.notification-container .notification-filters {
+    width: 320px;
+    padding: 10px;
+}
+.notification-container .notification-items {
+    flex: 1;
+    padding: 10px;
+}
