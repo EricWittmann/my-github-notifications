@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react-swc";
 import {startGitHubProxy} from "./src/proxy";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-const PORT: number = parseInt(process.env.SERVER_PORT || "8888");
+const PORT: number = parseInt(process.env.SERVER_PORT || "4040");
 
 export default defineConfig({
     base: "./",
