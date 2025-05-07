@@ -20,8 +20,10 @@ function getLastUrlSegment(url: string): string {
 
 
 export type NotificationListItemProps = {
-    notification: GitHubNotification;
-    onMarkAsRead: (notification: GitHubNotification) => void;
+    notification: GitHubNotification,
+    isSelected: boolean
+    onMarkAsRead: (notification: GitHubNotification) => void,
+    onClick: (notification: GitHubNotification) => void,
 };
 
 export const NotificationListItem: FunctionComponent<NotificationListItemProps> = (props: NotificationListItemProps) => {
@@ -37,11 +39,12 @@ export const NotificationListItem: FunctionComponent<NotificationListItemProps> 
     }
 
     const readUnreadClass = props.notification.unread ? "unread" : "read";
+    const selectedClass = props.isSelected ? "selected" : "";
 
     return (
-        <div className={`notification-list-item ${readUnreadClass}`}>
+        <div className={`notification-list-item ${readUnreadClass} ${selectedClass}`} onClick={() => props.onClick(props.notification)}>
             <div className="nli-icon">
-                <NotificationListItemIcon notification={props.notification} />
+                <NotificationListItemIcon notification={props.notification}/>
             </div>
             <div className="nli-summary">
                 <div className="nli-repo">
@@ -60,11 +63,12 @@ export const NotificationListItem: FunctionComponent<NotificationListItemProps> 
                 {props.notification.reason}
             </div>
             <div className="nli-updated">
-                <FromNow date={props.notification.updated_at} />
+                <FromNow date={props.notification.updated_at}/>
             </div>
             <If condition={props.notification.unread}>
                 <div className="nli-actions">
-                    <Button variant="secondary" ouiaId="MarkAsRead" onClick={() => props.onMarkAsRead(props.notification)}>
+                    <Button variant="secondary" ouiaId="MarkAsRead"
+                            onClick={() => props.onMarkAsRead(props.notification)}>
                         Mark as read
                     </Button>
                 </div>

@@ -64,7 +64,7 @@ async function fetchAllNotifications(since: DateTime): Promise<GitHubNotificatio
 export const useNotificationService: () => NotificationService = (): NotificationService => {
     return {
         getNotifications(since: DateTime): Promise<GitHubNotification[]> {
-            console.info("Getting notifications from GitHub");
+            console.info("Getting notifications from GitHub since %s", since.toISO());
             return fetchAllNotifications(since);
         },
         markNotificationAsRead(notification: GitHubNotification): Promise<void> {

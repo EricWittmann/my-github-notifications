@@ -13,6 +13,11 @@
     background-color: #f6f8fa;
 }
 
+.notification-list-item.selected {
+    background-color: #c6ecc6;
+    border-left: 2px solid #488e47;
+}
+
 .notification-list-item .nli-icon {
     padding-right: 5px;
     color: #1a7f37;
