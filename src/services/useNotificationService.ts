@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {DateTime} from "luxon";
 
-const GH_NOTIFICATION_API_URL: string ="http://localhost:4000/api/notifications";
+const GH_NOTIFICATION_API_URL: string ="http://localhost:4000/notifications";
 
 export interface GitHubNotificationSubject {
     title: string;
@@ -68,6 +68,7 @@ export const useNotificationService: () => NotificationService = (): Notificatio
             return fetchAllNotifications(since);
         },
         markNotificationAsRead(notification: GitHubNotification): Promise<void> {
+            console.info("Marking notification as read: ", notification.subject.title);
             const threadId: string = notification.url.substring(notification.url.indexOf("/threads/") + 9);
             const apiUrl: string = `${GH_NOTIFICATION_API_URL}/threads/${threadId}`;
             return axios.patch(apiUrl);

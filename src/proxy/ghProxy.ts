@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const GITHUB_API_URL = "https://api.github.com";
+
 const PORT = 4000;
 
 let app: any | undefined = undefined;
@@ -23,25 +25,54 @@ export function startGitHubProxy() {
   app = express();
   app.use(cors());
 
-  app.get("/api/notifications", async (req: Request, res: Response) => {
-    console.log("baseUrl: " + req.baseUrl);
+  app.all("/*", async (req: Request, res: Response) => {
+    let burl: string = req.url;
+    const qidx: number = burl.indexOf("?");
+    if (qidx >= 0) {
+      burl = burl.substring(0, qidx);
+    }
+    const ghUrl: string = GITHUB_API_URL + burl;
+    console.log("--- request ---");
+    console.log("method: " + req.method);
     console.log("url: " + req.url);
+    console.log("burl: " + burl);
     console.log("query: " + JSON.stringify(req.query));
+    console.log("ghurl: " + ghUrl);
 
     try {
-      const response = await axios.get("https://api.github.com/notifications", {
+      const axiosConfig = {
         headers: {
-          Authorization: `token ${GITHUB_TOKEN}`
+          Authorization: `token ${GITHUB_TOKEN}`,
+          Host: "api.github.com",
         },
         params: req.query,
-      });
+      };
+      let response;
+      switch (req.method) {
+        case "GET":
+          response = await axios.get(ghUrl, axiosConfig);
+          break;
+        case "POST":
+          response = await axios.post(ghUrl, req.body, axiosConfig);
+          break;
+        case "PUT":
+          response = await axios.put(ghUrl, req.body, axiosConfig);
+          break;
+        case "PATCH":
+          response = await axios.patch(ghUrl, req.body, axiosConfig);
+          break;
+        case "DELETE":
+          response = await axios.delete(ghUrl, axiosConfig);
+          break;
+      }
 
-      console.info("Success: " + response.status);
+      console.info("Success: " + response.status, response.statusText);
       res.json(response.data);
     } catch (error: any) {
-      console.error("Error fetching GitHub notifications:", error.message);
-      res.status(500).json({ error: "Failed to fetch notifications" });
+      console.error("Error: ", error.status, error.message);
+      res.status(error.status).json({ error: error.message });
     }
+    console.log("");
   });
 
   app.listen(PORT, () => {

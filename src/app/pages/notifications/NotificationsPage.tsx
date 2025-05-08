@@ -105,7 +105,7 @@ export const NotificationsPage: FunctionComponent<PageProperties> = () => {
 
     useEffect(() => {
         const filtered = filterNotifications(newNotifications);
-        setNewNotificationCount(notifications.length);
+        setNewNotificationCount(newNotifications.length);
         setNewNotificationFilteredCount(filtered.length);
     }, [newNotifications]);
 

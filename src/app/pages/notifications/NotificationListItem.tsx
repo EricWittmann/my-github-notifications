@@ -68,7 +68,10 @@ export const NotificationListItem: FunctionComponent<NotificationListItemProps> 
             <If condition={props.notification.unread}>
                 <div className="nli-actions">
                     <Button variant="secondary" ouiaId="MarkAsRead"
-                            onClick={() => props.onMarkAsRead(props.notification)}>
+                            onClick={(evt) => {
+                                props.onMarkAsRead(props.notification)
+                                evt.stopPropagation();
+                            }}>
                         Mark as read
                     </Button>
                 </div>
