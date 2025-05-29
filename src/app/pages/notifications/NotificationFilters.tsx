@@ -14,9 +14,9 @@ export type NotificationFiltersProps = {
 
 export const NotificationFilters: FunctionComponent<NotificationFiltersProps> = (props: NotificationFiltersProps) => {
     const [expanded, setExpanded] = useState(["section-range", "section-types", "section-showall"]);
-    const [range, setRange] = useState<string>("today");
-    const [selectedTypes, setSelectedTypes] = useState<string[]>(["Issue", "Discussion"]);
-    const [showAll, setShowAll] = useState<boolean>(true);
+    const [range, setRange] = useState<string>("thisWeek");
+    const [selectedTypes, setSelectedTypes] = useState<string[]>(["Issue", "Discussion", "PullRequest", "Release"]);
+    const [showAll, setShowAll] = useState<boolean>(false);
 
     const toggle = (id: any) => {
         const index = expanded.indexOf(id);
